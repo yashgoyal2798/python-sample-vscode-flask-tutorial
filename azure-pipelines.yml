@@ -34,17 +34,3 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
-# download the artifact drop from the previous job
-- task: DownloadBuildArtifacts@0
-  inputs:
-    artifactName: drop
-    downloadPath: '$(System.DefaultWorkingDirectory)'
-
-  # deploy to Azure Web App staging
-- task: AzureWebApp@1
-  inputs:
-    package: $(System.DefaultWorkingDirectory)/**/*.zip  
-    azureSubscription: '<prod Azure service connection>'
-    appName: '<name of prod web app>'
-    slotName: staging
-
